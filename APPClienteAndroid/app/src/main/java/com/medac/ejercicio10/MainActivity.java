@@ -2,6 +2,7 @@ package com.medac.ejercicio10;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -44,13 +45,16 @@ public class MainActivity extends AppCompatActivity {
         btnInsertar = findViewById(R.id.button);
         btnBuscar = findViewById(R.id.button2);
 
+        //objeto que permite trabajar con la conexión
         queue = Volley.newRequestQueue(this);
 
+        //abreviación para hacer un evento
         btnInsertar.setOnClickListener(v -> insertar());
         btnBuscar.setOnClickListener(v -> buscarPorNombre());
     }
 
     private void insertar() {
+        //trim por si hay espacio
         String nombre = etNombre.getText().toString().trim();
         String edadStr = etEdad.getText().toString().trim();
 
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         StringRequest req = new StringRequest(
+                //Enviar datos
                 Request.Method.POST,
                 URL_INSERTAR,
                 response -> {
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     toast("Error al insertar");
                 }
         ) {
+            //Manda los datos que quiere insertar
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> p = new HashMap<>();
@@ -88,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
         queue.add(req);
     }
-
     private void buscarPorNombre() {
         String target = etBuscar.getText().toString().trim();
         if (target.isEmpty()) {
@@ -132,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         queue.add(req);
+
     }
 
     private void toast(String msg) {

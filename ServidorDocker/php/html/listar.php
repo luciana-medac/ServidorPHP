@@ -7,5 +7,5 @@ $datos = [];
 while ($f = mysqli_fetch_assoc($res)) $datos[] = $f;
 
 // Salida JSON directa
-echo json_encode($datos);
+echo json_encode($datos);<
 ?>
